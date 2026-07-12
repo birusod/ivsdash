@@ -1,0 +1,28 @@
+{
+  "name": "python-r-julia-env",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+      "vscodeRSupport": "full",
+      "installRadian": true
+    },
+    "ghcr.io/julialang/devcontainer-features/julia:1": {
+      "channel": "release"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "REditorSupport.r",
+        "julialang.language-julia",
+        "quarto.quarto"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install --user pandas numpy matplotlib jupyter && R -e \"install.packages(c('tidyverse','DBI','RPostgres','RSQLite'), repos='https://cloud.r-project.org')\" && julia -e 'using Pkg; Pkg.add([\"DataFrames\", \"SQLite\", \"LibPQ\", \"CSV\"])'"
+}
